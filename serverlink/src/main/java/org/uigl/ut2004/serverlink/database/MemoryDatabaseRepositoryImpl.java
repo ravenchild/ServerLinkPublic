@@ -108,7 +108,7 @@ public class MemoryDatabaseRepositoryImpl implements DatabaseRepository {
 
         if (account == null) {
             if (allowCreate) {
-                account = new ServerAccount(UUID.randomUUID(), username, password);
+                account = new ServerAccount(UUID.randomUUID(), username, password, "");
                 mServers.put(username, account);
                 mServersIdMapping.put(account.getAccountId(), account);
                 return account.getAccountId();
@@ -117,7 +117,7 @@ public class MemoryDatabaseRepositoryImpl implements DatabaseRepository {
             }
         }
 
-        if (!account.getPassword().equals(password)) {
+        if (!account.getPasswordHash().equals(password)) {
             throw new AuthenticationException();
         }
 
